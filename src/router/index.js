@@ -8,12 +8,17 @@ import Vue from 'vue'
 // 解决：npm i vue-router@3
 import VueRouter from 'vue-router'
 
+// 导入 login 路由组件
+import Login from '@/views/login'
+
 // 全局注册
 Vue.use(VueRouter)
 
 // 初始化路由对象(创建路由规则)
 const router = new VueRouter({
-  routes: []
+  routes: [
+    { name: 'login', path: '/login', component: Login }
+  ]
 })
 
 // 导出路由对象
