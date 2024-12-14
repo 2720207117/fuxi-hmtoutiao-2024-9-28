@@ -15,10 +15,9 @@
         <el-form-item>
           <el-checkbox v-model="checked"></el-checkbox>
           我已阅读并同意
-          <el-link :underline="false">用户协议</el-link>和<el-link
-            :underline="false"
-            >隐私条款</el-link
-          >
+          <el-link :underline="false" type="primary"> 用户协议 </el-link>
+          和
+          <el-link :underline="false" type="primary"> 隐私条款 </el-link>
         </el-form-item>
         <el-form-item>
           <el-button class="sub" type="primary"> 登录 </el-button>
