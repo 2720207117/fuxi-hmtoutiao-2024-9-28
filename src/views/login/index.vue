@@ -4,12 +4,19 @@
       <img src="@/assets/images/logo_index.png" alt="logo" />
 
       <!-- 表单 -->
-      <el-form>
-        <el-form-item>
-          <el-input placeholder="请输入手机号"></el-input>
+      <el-form :model="loginForm" :rules="loginRules" status-icon>
+        <el-form-item prop="mobile">
+          <el-input
+            placeholder="请输入手机号"
+            v-model="loginForm.mobile"
+          ></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-input class="yzm" placeholder="验证码"></el-input>
+        <el-form-item prop="code">
+          <el-input
+            class="yzm"
+            placeholder="验证码"
+            v-model="loginForm.code"
+          ></el-input>
           <el-button class="btn_yzm">发送验证码</el-button>
         </el-form-item>
         <el-form-item>
@@ -30,7 +37,36 @@
 <script>
 export default {
   data() {
+    // 自定义校验规则（校验手机号）
+    const checkMobile = (rule, value, callback) => {
+      // 校验逻辑（1开头，第二位3-9之间的数字，剩余为9个任意数字）
+      if (/^1[3-9]\d{9}$/.test(value)) {
+        callback();
+      } else {
+        callback(new Error("手机号码格式有误！"));
+      }
+    };
+
     return {
+      // 表单对应的对象
+      loginForm: {
+        mobile: "13439211668",
+        code: "246810",
+      },
+
+      // 表单的校验规则对象
+      loginRules: {
+        mobile: [
+          { required: true, message: "手机号不能为空！", trigger: "blur" },
+          { validator: checkMobile, trigger: "blur" },
+        ],
+        code: [
+          { required: true, message: "验证码不能为空！", trigger: "blur" },
+          { len: 6, message: "验证码必须为六位数字！", trigger: "blur" },
+        ],
+      },
+
+      // 默认选中复选框
       checked: true,
     };
   },
