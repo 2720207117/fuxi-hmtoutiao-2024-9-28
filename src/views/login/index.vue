@@ -4,7 +4,12 @@
       <img src="@/assets/images/logo_index.png" alt="logo" />
 
       <!-- 表单 -->
-      <el-form :model="loginForm" :rules="loginRules" status-icon>
+      <el-form
+        ref="loginForm"
+        :model="loginForm"
+        :rules="loginRules"
+        status-icon
+      >
         <el-form-item prop="mobile">
           <el-input
             placeholder="请输入手机号"
@@ -27,7 +32,9 @@
           <el-link :underline="false" type="primary"> 隐私条款 </el-link>
         </el-form-item>
         <el-form-item>
-          <el-button class="sub" type="primary"> 登录 </el-button>
+          <el-button class="sub" type="primary" @click="login()">
+            登录
+          </el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -39,8 +46,8 @@ export default {
   data() {
     // 自定义校验规则（校验手机号）
     const checkMobile = (rule, value, callback) => {
-      // 校验逻辑（1开头，第二位3-9之间的数字，剩余为9个任意数字）
-      if (/^1[3-9]\d{9}$/.test(value)) {
+      // 校验逻辑（1开头，第二位2-9之间的数字，剩余为9个任意数字）
+      if (/^1[2-9]\d{9}$/.test(value)) {
         callback();
       } else {
         callback(new Error("手机号码格式有误！"));
@@ -50,7 +57,7 @@ export default {
     return {
       // 表单对应的对象
       loginForm: {
-        mobile: "13439211668",
+        mobile: "12011111111",
         code: "246810",
       },
 
@@ -69,6 +76,17 @@ export default {
       // 默认选中复选框
       checked: true,
     };
+  },
+  methods: {
+    login() {
+      // 表单整体校验-->校验成功进行登录
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
+          // 校验成功进行登录
+          alert("登录成功！");
+        }
+      });
+    },
   },
 };
 </script>
