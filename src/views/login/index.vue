@@ -84,6 +84,23 @@ export default {
         if (valid) {
           // 校验成功进行登录
           alert("登录成功！");
+
+          this.$http
+            .post(
+              "http://api-toutiao-web.itheima.net/mp/v1_0/authorizations",
+              this.loginForm
+            )
+            .then((res) => {
+              // res 响应对象，包含相应数据
+              console.log(res);
+
+              // data 后台返回的json数据 已经转换为对象
+              const data = res.data;
+              console.log(data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
       });
     },

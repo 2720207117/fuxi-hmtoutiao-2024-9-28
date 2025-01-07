@@ -12,6 +12,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 默认会加载索引路径 可不用去写 （索引文件：index.js index.json）
 import router from '@/router'
 
+import axios from 'axios'
+
+// 将axios挂载到vue原型上，以便于在全局使用
+Vue.prototype.$http = axios
+
 // 全局注册组件(注册element-ui组件库)
 Vue.use(ElementUI)
 
