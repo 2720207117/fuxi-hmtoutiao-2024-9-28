@@ -97,9 +97,15 @@ export default {
               // data 后台返回的json数据 已经转换为对象
               const data = res.data;
               console.log(data);
+              // 登录成功后：做什么事情？
+              // 1. 跳转到首页
+              // 2. 保存登录状态
+
+              this.$router.push("/");
             })
             .catch((err) => {
-              console.log(err);
+              // console.log(err);
+              this.$message.error("用户名称或密码输入错误！");
             });
         }
       });
